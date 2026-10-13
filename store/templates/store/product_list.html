@@ -8,7 +8,10 @@
 
     {% for product in products %}
         <div>
-            <h3>{{ product.name }}</h3>
+            <h3><a href="{% url 'store:product_detail' product.slug %}">
+        {{ product.name }}
+    </a>
+</h3>
             <p>Price: Rs. {{ product.price }}</p>
             <p>Stock: {{ product.stock }}</p>
             <hr>
