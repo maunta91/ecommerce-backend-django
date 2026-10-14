@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ product.name }}</title>
-</head>
-<body>
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
     <h1>{{ product.name }}</h1>
     <p><strong>Price:</strong> Rs. {{ product.price }}</p>
     <p><strong>Stock:</strong> {{ product.stock }}</p>
@@ -11,5 +10,4 @@
 
     <br>
     <a href="/">← Back to Products</a>
-</body>
-</html>
+{% endblock %}
