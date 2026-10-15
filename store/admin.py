@@ -5,6 +5,7 @@ from .models import Category, Product
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name']
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -12,5 +13,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['available', 'created', 'category']
     list_editable = ['price', 'stock', 'available']
     prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name', 'description']
+    list_per_page =10
 
 # Register your models here.
