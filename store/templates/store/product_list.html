@@ -1,23 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Products</title>
-</head>
-<body>
-    <h1>Product List</h1>
+{% extends 'store/base.html' %}
 
-    {% for product in products %}
-        <div>
-            <h3><a href="{% url 'store:product_detail' product.slug %}">
-        {{ product.name }}
-    </a>
-</h3>
-            <p>Price: Rs. {{ product.price }}</p>
-            <p>Stock: {{ product.stock }}</p>
-            <hr>
-        </div>
-    {% empty %}
-        <p>No products available.</p>
-    {% endfor %}
-</body>
-</html>
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+
+    <!-- Categories Sidebar -->
+    <div class="col-md-3">
+        <h4>Categories</h4>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{% url 'store:product_list' %}">All Products</a>
+            </li>
+            {% for c in categories %}
+                <li class="list-group-item">
+                    <a href="{% url 'store:product_list_by_category' c.slug %}">
+                        {{ c.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Products -->
+    <div class="col-md-9">
+        <h2 class="mb-4">
+            {% if category %}{{ category.name }}{% else %}All Products{% endif %}
+        </h2>
+
+        {% for product in products %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'store:product_detail' product.slug %}">
+                            {{ product.name }}
+                        </a>
+                    </h5>
+                    <p class="card-text">Price: Rs. {{ product.price }}</p>
+                    <p class="card-text">Stock: {{ product.stock }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No products available.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
