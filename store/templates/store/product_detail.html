@@ -9,5 +9,11 @@
     <p><strong>Description:</strong> {{ product.description }}</p>
 
     <br>
-    <a href="/">← Back to Products</a>
+<form action="{% url 'cart:cart_add' product.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Add to Cart</button>
+</form>
+
+<br>
+<a href="/" class="btn btn-secondary mt-3">← Back to Products</a>
 {% endblock %}
