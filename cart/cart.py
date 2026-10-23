@@ -45,7 +45,12 @@ class Cart:
             item['total_price'] = item['price'] * item['quantity']
             yield item
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())        
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())       
+    def update(self, product, quantity):
+        product_id = str(product.id)
+        if product_id in self.cart:
+            self.cart[product_id]['quantity'] = quantity
+            self.save()     
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())

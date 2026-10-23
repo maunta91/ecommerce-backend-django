@@ -22,7 +22,15 @@
             <tr>
                 <td>{{ item.product.name }}</td>
                 <td>Rs. {{ item.product.price }}</td>
-                <td>{{ item.quantity }}</td>
+                <td>
+                    <form action="{% url 'cart:cart_update' item.product.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <div class="d-flex align-items-center">
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1
+                            <button type="submit" class="btn btn-primary btn-sm ml-2">Update</button>
+                        </div>
+                    </form>
+                </td>
                 <td>Rs. {{ item.total_price }}</td>
                 <td>
                     <a href="{% url 'cart:cart_remove' item.product.id %}" class="btn btn-danger btn-sm">Remove</a>

@@ -20,3 +20,10 @@ def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
+def cart_update(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    quantity = int(request.POST.get('quantity', 1))
+    cart.update(product=product, quantity=quantity)
+    return redirect('cart:cart_detail')
+    

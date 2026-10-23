@@ -9,6 +9,9 @@
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand text-white text-decoration-none" href="/">My Shop</a>
+            <a href="{% url 'cart:cart_detail' %}" class="btn btn-outline-light">
+                Cart ({{ cart|length }})
+            </a>
         </div>
     </nav>
 
