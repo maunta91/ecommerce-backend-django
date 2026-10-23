@@ -50,7 +50,10 @@ class Cart:
         product_id = str(product.id)
         if product_id in self.cart:
             self.cart[product_id]['quantity'] = quantity
-            self.save()     
+            self.save()   
+    def clear(self):
+        del self.session['cart']
+        self.save()  
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
