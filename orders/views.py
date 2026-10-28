@@ -21,6 +21,9 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity']
                 )
+                product = item['product']
+                product.stock -= item['quantity']
+                product.save()
             cart.clear()
             return render(request, 'orders/order_created.html', {'order': order})
     else:
